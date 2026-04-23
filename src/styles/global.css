@@ -1,1 +1,58 @@
 @import "tailwindcss";
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #0c0c0e; }
+body {
+  font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: #f2f2f4;
+}
+::selection { background: rgba(255,90,58,0.35); color: #fff; }
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0c0c0e; }
+::-webkit-scrollbar-thumb { background: #242429; border-radius: 5px; border: 2px solid #0c0c0e; }
+::-webkit-scrollbar-thumb:hover { background: #333338; }
+
+@keyframes land-ping {
+  0%   { transform: scale(1); opacity: 0.8; }
+  80%  { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes land-float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+
+.land-reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 28px));
+  transition: transform .8s cubic-bezier(0.2, 0.8, 0.2, 1) var(--reveal-delay, 0ms),
+              opacity .8s ease var(--reveal-delay, 0ms);
+}
+.land-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .land-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 1100px) {
+  .land-hero-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+  .land-features-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .land-how-grid { grid-template-columns: 1fr !important; }
+  .land-step-arrow { display: none !important; }
+  .land-download-grid { grid-template-columns: 1fr !important; }
+  .land-screens-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .land-stack-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .land-annotation { display: none !important; }
+}
+@media (max-width: 680px) {
+  .land-nav-links { display: none !important; }
+  .land-hide-narrow { display: none !important; }
+  .land-features-grid { grid-template-columns: 1fr !important; }
+  .land-screens-grid { grid-template-columns: 1fr !important; }
+  .land-stack-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}

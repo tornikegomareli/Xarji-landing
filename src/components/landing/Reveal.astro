@@ -1,0 +1,6 @@
+---
+const { delay = 0, y = 28 } = Astro.props;
+---
+<div class="land-reveal" data-reveal style={`--reveal-delay:${delay}ms;--reveal-y:${y}px`}>
+  <slot />
+</div>
