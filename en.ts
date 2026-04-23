@@ -93,13 +93,13 @@ export const en = {
       copilotText: 'Copilot',
       copilotUrl: 'https://copilot.money',
       suffix:
-        " or any of the tools the rest of the world uses can plug into. And the analytics in the native Georgian banking apps? No custom categories, no advanced filters, no budget limits and I don’t know why, but they never worked for me. It always felt like they were hallucinating my budgets.",
+        ", or any of the tools the rest of the world uses can plug into. The analytics in native Georgian apps? No custom categories, no advanced filters, no budget limits, and I don't know but it never worked for me, it was always a feeling that it was halucinating my budgets",
     },
     cards: [
       {
         tag: '01 · The gap',
         title: 'No API. Anywhere.',
-        body: 'BOG, TBC and others - neither publishes a transactions endpoint. No OAuth, no OFX, no Plaid. You cannot programmatically read your own money.',
+        body: 'BOG, TBC — neither publishes a transactions endpoint. No OAuth, no OFX, no Plaid. You cannot programmatically read your own money.',
         stat: '0',
         statLabel: 'Georgian banks with a public API',
       },
@@ -113,7 +113,7 @@ export const en = {
       {
         tag: '03 · The hack',
         title: 'But the SMS are already there.',
-        body: 'Every Georgian bank sends a structured SMS the instant you tap your card. If you mirror those SMS from your phone to Messages.app on macOS, the data is sitting in a local SQLite file - just waiting to be proceed.',
+        body: 'Every Georgian bank sends a structured SMS the instant you tap your card. If you mirror those SMS from your phone to Messages.app on macOS, the data is sitting in a local SQLite file — just waiting to be parsed.',
         stat: '100%',
         statLabel: 'Of transactions, already on your Mac',
       },
@@ -124,7 +124,7 @@ export const en = {
       quoteLine2: 'I just need to open my laptop."',
       body:
         "macOS already mirrors iPhone SMS into a local SQLite database. Every payment confirmation, every declined card, every card-on-file charge — it's all there, timestamped, in plain text. Xarji reads it, parses it, and builds the dashboard the banks refused to.",
-      tagline: 'A little bit hacky. Entirely local. Works whether anyone likes it or not.',
+      tagline: 'A little bit hacky. Entirely local. Works whether BOG likes it or not.',
       flow: {
         iphoneLabel: 'Your iPhone',
         iphoneSub: 'Bank SMS arrives',
