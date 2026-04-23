@@ -24,50 +24,37 @@ export default function Download({ copy, locale }: Props) {
           borderRadius: 28,
           boxShadow: `0 40px 100px rgba(0,0,0,0.4)`,
         }}>
-          <div className="land-download-grid" style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 36, alignItems: 'center' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <span style={{ padding: '5px 12px', borderRadius: 999, background: LAND.accent, color: '#fff', fontSize: 10.5, fontWeight: 800, fontFamily: LAND.sans, letterSpacing: 0.8, textTransform: 'uppercase' }}>{copy.latestBadge}</span>
-                <span style={{ fontFamily: LAND.mono, fontSize: 13, color: LAND.muted }}>v{RELEASE.version}</span>
-              </div>
-              <h3 style={{ margin: '16px 0 0 0', fontSize: 36, fontWeight: 700, color: LAND.text, fontFamily: LAND.sans, letterSpacing: -1.4, lineHeight: 1.05 }}>
-                {copy.xarjiForPre}<span style={{ color: LAND.accent }}>{copy.xarjiForAccent}</span>
-              </h3>
-              <div style={{ marginTop: 10, fontSize: 14, color: LAND.muted, fontFamily: LAND.sans }}>
-                {copy.releasedPrefix} {releaseDate} · {copy.requires}
-              </div>
-
-              <a href={RELEASE.dmgUrl} style={{
-                marginTop: 24,
-                display: 'inline-flex', alignItems: 'center', gap: 14,
-                padding: '18px 28px', borderRadius: 14,
-                background: LAND.accent, color: '#fff', textDecoration: 'none',
-                fontSize: 16, fontWeight: 700, fontFamily: LAND.sans,
-                boxShadow: `0 20px 50px ${LAND.accentSoft}, inset 0 1px 0 rgba(255,255,255,0.2)`,
-                transition: 'transform .12s ease',
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-1px)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-                <AppleGlyph size={20}/>
-                <span>{copy.dmgCta}</span>
-                <span style={{ padding: '3px 9px', borderRadius: 6, background: 'rgba(255,255,255,0.18)', fontFamily: LAND.mono, fontSize: 11, fontWeight: 500 }}>{RELEASE.size}</span>
-              </a>
-
-              <div style={{ marginTop: 18, display: 'flex', gap: 16, flexWrap: 'wrap', fontSize: 11.5, color: LAND.dim, fontFamily: LAND.mono }}>
-                <span>{RELEASE.sha}</span>
-                <span>{copy.signedNotarized}</span>
-              </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span style={{ padding: '5px 12px', borderRadius: 999, background: LAND.accent, color: '#fff', fontSize: 10.5, fontWeight: 800, fontFamily: LAND.sans, letterSpacing: 0.8, textTransform: 'uppercase' }}>{copy.latestBadge}</span>
+              <span style={{ fontFamily: LAND.mono, fontSize: 13, color: LAND.muted }}>v{RELEASE.version}</span>
+            </div>
+            <h3 style={{ margin: '16px 0 0 0', fontSize: 36, fontWeight: 700, color: LAND.text, fontFamily: LAND.sans, letterSpacing: -1.4, lineHeight: 1.05 }}>
+              {copy.xarjiForPre}<span style={{ color: LAND.accent }}>{copy.xarjiForAccent}</span>
+            </h3>
+            <div style={{ marginTop: 10, fontSize: 14, color: LAND.muted, fontFamily: LAND.sans }}>
+              {copy.releasedPrefix} {releaseDate} · {copy.requires}
             </div>
 
-            <div style={{ padding: 24, background: LAND.bg, border: `1px solid ${LAND.line}`, borderRadius: 18 }}>
-              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {copy.releaseNotes.map((n, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 10, fontSize: 12.5, color: LAND.muted, fontFamily: LAND.sans, lineHeight: 1.5 }}>
-                    <span style={{ color: LAND.accent, fontFamily: LAND.mono, flexShrink: 0 }}>+</span>
-                    <span>{n}</span>
-                  </li>
-                ))}
-              </ul>
+            <a href={RELEASE.dmgUrl} style={{
+              marginTop: 24,
+              display: 'inline-flex', alignItems: 'center', gap: 14,
+              padding: '18px 28px', borderRadius: 14,
+              background: LAND.accent, color: '#fff', textDecoration: 'none',
+              fontSize: 16, fontWeight: 700, fontFamily: LAND.sans,
+              boxShadow: `0 20px 50px ${LAND.accentSoft}, inset 0 1px 0 rgba(255,255,255,0.2)`,
+              transition: 'transform .12s ease',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-1px)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+              <AppleGlyph size={20}/>
+              <span>{copy.dmgCta}</span>
+              <span style={{ padding: '3px 9px', borderRadius: 6, background: 'rgba(255,255,255,0.18)', fontFamily: LAND.mono, fontSize: 11, fontWeight: 500 }}>{RELEASE.size}</span>
+            </a>
+
+            <div style={{ marginTop: 18, display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap', fontSize: 11.5, color: LAND.dim, fontFamily: LAND.mono }}>
+              <span>{RELEASE.sha}</span>
+              <span>{copy.signedNotarized}</span>
             </div>
           </div>
         </div>

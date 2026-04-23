@@ -44,7 +44,6 @@ html { scroll-behavior: smooth; }
   .land-features-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .land-how-grid { grid-template-columns: 1fr !important; }
   .land-step-arrow { display: none !important; }
-  .land-download-grid { grid-template-columns: 1fr !important; }
   .land-screens-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .land-stack-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
