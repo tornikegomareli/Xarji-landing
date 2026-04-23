@@ -1,6 +1,5 @@
 import { LAND } from '../../lib/theme';
 import type { Copy } from '../../lib/copy';
-import { SectionLabel } from './glyphs';
 
 export function Features({ copy }: { copy: Copy['features'] }) {
   return (
