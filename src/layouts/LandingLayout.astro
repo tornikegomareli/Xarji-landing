@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Nav from '../components/landing/Nav';
 import Hero from '../components/landing/Hero';
+import Why from '../components/landing/Why';
 import ProductShot from '../components/landing/ProductShot';
 import { Features, HowItWorks } from '../components/landing/Features';
 import Download from '../components/landing/Download';
@@ -34,6 +35,7 @@ const htmlLang = locale === 'ka' ? 'ka' : 'en';
   <body>
     <Nav client:load copy={copy.nav} locale={locale} />
     <Hero client:load copy={copy.hero} />
+    <Reveal><Why copy={copy.why} /></Reveal>
     <Reveal><ProductShot copy={copy.product} /></Reveal>
     <Reveal><Features copy={copy.features} /></Reveal>
     <Reveal><HowItWorks copy={copy.how} /></Reveal>
