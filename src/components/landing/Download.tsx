@@ -1,7 +1,7 @@
 import { LAND, RELEASE, PRIOR_RELEASES, REPO_URL } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
 import { formatDate } from '../../lib/copy';
-import { SectionLabel, AppleGlyph } from './glyphs';
+import { AppleGlyph } from './glyphs';
 
 type Props = { copy: Copy['download']; locale: Locale };
 
@@ -15,7 +15,7 @@ export default function Download({ copy, locale }: Props) {
         background: LAND.accent, opacity: 0.1, filter: 'blur(120px)', pointerEvents: 'none',
       }}/>
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
-        <SectionLabel eyebrow={copy.eyebrow} title={copy.title} align="center"/>
+        <div style={{ textAlign: 'center', fontSize: 22, color: LAND.accent, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
 
         <div style={{
           marginTop: 40, padding: 36,
@@ -60,11 +60,7 @@ export default function Download({ copy, locale }: Props) {
             </div>
 
             <div style={{ padding: 24, background: LAND.bg, border: `1px solid ${LAND.line}`, borderRadius: 18 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: LAND.text, fontFamily: LAND.sans }}>{copy.whatsNewPrefix}{RELEASE.version}</div>
-                <span style={{ fontSize: 10, color: LAND.dim, fontFamily: LAND.mono }}>{copy.changelogLabel}</span>
-              </div>
-              <ul style={{ margin: '16px 0 0 0', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {copy.releaseNotes.map((n, i) => (
                   <li key={i} style={{ display: 'flex', gap: 10, fontSize: 12.5, color: LAND.muted, fontFamily: LAND.sans, lineHeight: 1.5 }}>
                     <span style={{ color: LAND.accent, fontFamily: LAND.mono, flexShrink: 0 }}>+</span>
