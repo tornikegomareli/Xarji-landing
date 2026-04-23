@@ -1,0 +1,9 @@
+---
+import LandingLayout from '../../layouts/LandingLayout.astro';
+import { getCopy } from '../../lib/copy';
+
+const locale = 'ka' as const;
+const copy = getCopy(locale);
+---
+
+<LandingLayout copy={copy} locale={locale} />

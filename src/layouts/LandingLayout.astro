@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import Nav from '../components/landing/Nav';
+import Hero from '../components/landing/Hero';
+import ProductShot from '../components/landing/ProductShot';
+import { Features, HowItWorks } from '../components/landing/Features';
+import Download from '../components/landing/Download';
+import { Faq, TechStack, Newsletter, Footer } from '../components/landing/Rest';
+import Reveal from '../components/landing/Reveal.astro';
+import type { Copy, Locale } from '../lib/copy';
+
+interface Props {
+  copy: Copy;
+  locale: Locale;
+}
+
+const { copy, locale } = Astro.props;
+const htmlLang = locale === 'ka' ? 'ka' : 'en';
+---
+
+<html lang={htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <title>{copy.meta.title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={copy.meta.description} />
+    <link rel="alternate" hreflang="en" href="/" />
+    <link rel="alternate" hreflang="ka" href="/ka/" />
+    <link rel="alternate" hreflang="x-default" href="/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <Nav client:load copy={copy.nav} locale={locale} />
+    <Hero client:load copy={copy.hero} />
+    <Reveal><ProductShot copy={copy.product} /></Reveal>
+    <Reveal><Features copy={copy.features} /></Reveal>
+    <Reveal><HowItWorks copy={copy.how} /></Reveal>
+    <Reveal><Download copy={copy.download} locale={locale} /></Reveal>
+    <Reveal><Faq copy={copy.faq} client:visible /></Reveal>
+    <Reveal><Newsletter copy={copy.newsletter} client:visible /></Reveal>
+    <Reveal><TechStack copy={copy.techStack} /></Reveal>
+    <Footer copy={copy.footer} locale={locale} />
+
+    <script is:inline>
+      (() => {
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const els = document.querySelectorAll('[data-reveal]');
+        if (prefersReduced) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        els.forEach((el) => io.observe(el));
+      })();
+    </script>
+  </body>
+</html>
