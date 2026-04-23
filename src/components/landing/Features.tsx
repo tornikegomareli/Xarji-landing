@@ -30,7 +30,7 @@ export function HowItWorks({ copy }: { copy: Copy['how'] }) {
   return (
     <section id="how" style={{ padding: '100px 28px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <SectionLabel eyebrow={copy.eyebrow} title={copy.title}/>
+        <div style={{ fontSize: 22, color: LAND.accent, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
         <div className="land-how-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginTop: 48 }}>
           {copy.steps.map((s, i) => (
             <div key={s.n} style={{ position: 'relative' }}>
