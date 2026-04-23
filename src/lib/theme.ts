@@ -27,6 +27,12 @@ export const LAND = {
 export const REPO_URL = 'https://github.com/tornikegomareli/Xarji';
 export const REPO_STARS = 9;
 
+// Buttondown newsletter handle. Update after creating the account at
+// buttondown.com — the form POSTs to
+// https://buttondown.com/api/emails/embed-subscribe/<BUTTONDOWN_USERNAME>.
+// Dashboard with subscriber list lives at buttondown.com/<BUTTONDOWN_USERNAME>.
+export const BUTTONDOWN_USERNAME = 'xarji';
+
 export const RELEASE = {
   version: '0.2.4',
   dateIso: '2026-04-23',

@@ -328,9 +328,12 @@ export const en = {
       'One short email when a new version drops, or a new bank gets supported. No marketing, no drip campaigns, no "hey, haven\'t seen you in a while!" — promise. Unsubscribe in one click.',
     emailPlaceholder: 'your@email.com',
     subscribeCta: 'Subscribe',
+    loadingCta: 'Subscribing…',
     successTitle: "You're in. Talk soon.",
     successSubPre: 'We sent a confirmation to ',
     successSubPost: '. Click the link to seal the deal.',
+    errorTitle: "Couldn't reach the newsletter service.",
+    errorSub: 'Give it a second and try again.',
     trustNote: 'We store your email on the same self-hosted principles. No Mailchimp, no trackers.',
   },
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LAND, RELEASE, REPO_URL } from '../../lib/theme';
+import { LAND, RELEASE, REPO_URL, BUTTONDOWN_USERNAME } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
 import { formatDate } from '../../lib/copy';
 import { Logomark, SectionLabel } from './glyphs';
@@ -93,16 +93,38 @@ export function TechStack({ copy }: { copy: Copy['techStack'] }) {
   );
 }
 
+type NewsletterStatus = 'idle' | 'loading' | 'success' | 'error';
+
 export function Newsletter({ copy }: { copy: Copy['newsletter'] }) {
   const [email, setEmail] = React.useState('');
-  const [submitted, setSubmitted] = React.useState(false);
+  const [status, setStatus] = React.useState<NewsletterStatus>('idle');
   const [focused, setFocused] = React.useState(false);
 
-  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!email.trim() || !email.includes('@')) return;
-    setSubmitted(true);
+    const trimmed = email.trim();
+    if (!trimmed || !trimmed.includes('@')) return;
+    setStatus('loading');
+    try {
+      const res = await fetch(
+        `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ email: trimmed, tag: 'landing' }).toString(),
+        },
+      );
+      if (!res.ok && res.type !== 'opaque') throw new Error(`HTTP ${res.status}`);
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
   };
+
+  const isSuccess = status === 'success';
+  const isError = status === 'error';
+  const isLoading = status === 'loading';
+  const showForm = !isSuccess;
 
   return (
     <section style={{ padding: '100px 28px' }}>
@@ -122,33 +144,37 @@ export function Newsletter({ copy }: { copy: Copy['newsletter'] }) {
               {copy.body}
             </p>
 
-            {!submitted ? (
+            {showForm ? (
               <form onSubmit={submit} style={{
                 marginTop: 28, display: 'flex', gap: 8, padding: 6,
                 background: LAND.bg, borderRadius: 14,
-                border: `1px solid ${focused ? LAND.accent : LAND.lineStrong}`,
+                border: `1px solid ${focused ? LAND.accent : isError ? `${LAND.accent}99` : LAND.lineStrong}`,
                 transition: 'border-color .15s ease',
               }}>
                 <input
                   type="email" placeholder={copy.emailPlaceholder}
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={e => { setEmail(e.target.value); if (isError) setStatus('idle'); }}
                   onFocus={() => setFocused(true)}
                   onBlur={() => setFocused(false)}
+                  disabled={isLoading}
                   style={{
                     flex: 1, background: 'transparent', border: 'none', outline: 'none',
                     color: LAND.text, fontFamily: LAND.sans, fontSize: 14,
                     padding: '12px 16px',
                   }}
                 />
-                <button type="submit" style={{
+                <button type="submit" disabled={isLoading} style={{
                   padding: '12px 22px', borderRadius: 10,
-                  background: LAND.accent, color: '#fff', border: 'none', cursor: 'pointer',
+                  background: LAND.accent, color: '#fff', border: 'none',
+                  cursor: isLoading ? 'default' : 'pointer',
+                  opacity: isLoading ? 0.7 : 1,
                   fontSize: 13, fontWeight: 700, fontFamily: LAND.sans,
                   display: 'flex', alignItems: 'center', gap: 8,
+                  transition: 'opacity .15s ease',
                 }}>
-                  <span>{copy.subscribeCta}</span>
-                  <span>→</span>
+                  <span>{isLoading ? copy.loadingCta : copy.subscribeCta}</span>
+                  {!isLoading && <span>→</span>}
                 </button>
               </form>
             ) : (
@@ -158,6 +184,13 @@ export function Newsletter({ copy }: { copy: Copy['newsletter'] }) {
                   <div style={{ fontSize: 14, fontWeight: 700, color: LAND.text, fontFamily: LAND.sans }}>{copy.successTitle}</div>
                   <div style={{ fontSize: 12, color: LAND.muted, fontFamily: LAND.sans, marginTop: 3 }}>{copy.successSubPre}{email}{copy.successSubPost}</div>
                 </div>
+              </div>
+            )}
+
+            {isError && (
+              <div role="alert" style={{ marginTop: 12, fontSize: 12.5, color: LAND.accent, fontFamily: LAND.sans, lineHeight: 1.5 }}>
+                <span style={{ fontWeight: 700 }}>{copy.errorTitle}</span>
+                <span style={{ color: LAND.muted, marginLeft: 6 }}>{copy.errorSub}</span>
               </div>
             )}
 
