@@ -6,7 +6,7 @@ export function Features({ copy }: { copy: Copy['features'] }) {
   return (
     <section style={{ padding: '100px 28px', background: LAND.bgDeep, borderTop: `1px solid ${LAND.line}`, borderBottom: `1px solid ${LAND.line}` }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
-        <SectionLabel eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle}/>
+        <div style={{ fontSize: 22, color: LAND.accent, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
         <div className="land-features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 48 }}>
           {copy.items.map((f) => (
             <div key={f.t} style={{
