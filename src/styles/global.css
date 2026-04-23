@@ -47,7 +47,6 @@ html { scroll-behavior: smooth; }
   .land-download-grid { grid-template-columns: 1fr !important; }
   .land-screens-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .land-stack-grid { grid-template-columns: repeat(2, 1fr) !important; }
-  .land-annotation { display: none !important; }
 }
 @media (max-width: 680px) {
   .land-nav-links { display: none !important; }
