@@ -10,21 +10,22 @@ export default function ProductShot({ copy }: Props) {
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <SectionLabel eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle}/>
 
-        <div style={{
-          position: 'relative', marginTop: 50,
-          background: LAND.panel, border: `1px solid ${LAND.lineStrong}`,
-          borderRadius: 24, padding: 0, overflow: 'hidden',
-          boxShadow: `0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px ${LAND.line}`,
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '14px 18px', background: LAND.bgDeep, borderBottom: `1px solid ${LAND.line}` }}>
-            <span style={{ width: 12, height: 12, borderRadius: 6, background: '#ff5f57' }}/>
-            <span style={{ width: 12, height: 12, borderRadius: 6, background: '#febc2e' }}/>
-            <span style={{ width: 12, height: 12, borderRadius: 6, background: '#28c840' }}/>
-            <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
-              <div style={{ padding: '4px 14px', borderRadius: 6, background: LAND.panelAlt, fontSize: 11, color: LAND.dim, fontFamily: LAND.mono }}>{copy.browserBar}</div>
+        <div style={{ position: 'relative', marginTop: 50 }}>
+          <div style={{
+            background: LAND.panel, border: `1px solid ${LAND.lineStrong}`,
+            borderRadius: 24, padding: 0, overflow: 'hidden',
+            boxShadow: `0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px ${LAND.line}`,
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '14px 18px', background: LAND.bgDeep, borderBottom: `1px solid ${LAND.line}` }}>
+              <span style={{ width: 12, height: 12, borderRadius: 6, background: '#ff5f57' }}/>
+              <span style={{ width: 12, height: 12, borderRadius: 6, background: '#febc2e' }}/>
+              <span style={{ width: 12, height: 12, borderRadius: 6, background: '#28c840' }}/>
+              <div style={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                <div style={{ padding: '4px 14px', borderRadius: 6, background: LAND.panelAlt, fontSize: 11, color: LAND.dim, fontFamily: LAND.mono }}>{copy.browserBar}</div>
+              </div>
             </div>
+            <MockDashboard mock={copy.mock}/>
           </div>
-          <MockDashboard mock={copy.mock}/>
           <Annotation style={{ top: '18%', left: -80 }} side="left" note={copy.annotations[0]}/>
           <Annotation style={{ top: '36%', right: -80 }} side="right" note={copy.annotations[1]}/>
           <Annotation style={{ bottom: '10%', left: -60 }} side="left" note={copy.annotations[2]}/>
