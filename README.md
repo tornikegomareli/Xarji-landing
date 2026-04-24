@@ -12,7 +12,3 @@ bun run dev          # http://localhost:4321/
 bun run build        # dist/index.html + dist/ka/index.html
 bun x astro check    # strict type-check
 ```
-
-Copy `.env.example` to `.env` and set `PUBLIC_INSTANT_LANDING_APP_ID` to the InstantDB app that collects newsletter signups.
-
-See [`CLAUDE.md`](./CLAUDE.md) for the project's architecture, i18n setup, and supported-banks invariant.
