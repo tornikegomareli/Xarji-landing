@@ -42,7 +42,7 @@ const htmlLang = locale === 'ka' ? 'ka' : 'en';
     <Reveal><HowItWorks copy={copy.how} /></Reveal>
     <Reveal><Download copy={copy.download} locale={locale} /></Reveal>
     <Reveal><Faq copy={copy.faq} client:visible /></Reveal>
-    <Reveal><Newsletter copy={copy.newsletter} client:visible /></Reveal>
+    <Reveal><Newsletter copy={copy.newsletter} locale={locale} client:visible /></Reveal>
     <Reveal><TechStack copy={copy.techStack} /></Reveal>
     <Footer copy={copy.footer} locale={locale} />
 

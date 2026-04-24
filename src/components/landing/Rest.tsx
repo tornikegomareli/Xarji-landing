@@ -1,7 +1,8 @@
 import React from 'react';
-import { LAND, RELEASE, REPO_URL, BUTTONDOWN_USERNAME } from '../../lib/theme';
+import { LAND, RELEASE, REPO_URL } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
 import { formatDate } from '../../lib/copy';
+import { landingDb, id } from '../../lib/instant';
 import { Logomark, SectionLabel } from './glyphs';
 
 export function Faq({ copy }: { copy: Copy['faq'] }) {
@@ -95,26 +96,25 @@ export function TechStack({ copy }: { copy: Copy['techStack'] }) {
 
 type NewsletterStatus = 'idle' | 'loading' | 'success' | 'error';
 
-export function Newsletter({ copy }: { copy: Copy['newsletter'] }) {
+export function Newsletter({ copy, locale }: { copy: Copy['newsletter']; locale: Locale }) {
   const [email, setEmail] = React.useState('');
   const [status, setStatus] = React.useState<NewsletterStatus>('idle');
   const [focused, setFocused] = React.useState(false);
 
   const submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const trimmed = email.trim();
+    const trimmed = email.trim().toLowerCase();
     if (!trimmed || !trimmed.includes('@')) return;
     setStatus('loading');
     try {
-      const res = await fetch(
-        `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ email: trimmed, tag: 'landing' }).toString(),
-        },
-      );
-      if (!res.ok && res.type !== 'opaque') throw new Error(`HTTP ${res.status}`);
+      await landingDb.transact([
+        landingDb.tx.subscriptions[id()].update({
+          email: trimmed,
+          subscribedAt: Date.now(),
+          source: 'landing',
+          locale,
+        }),
+      ]);
       setStatus('success');
     } catch {
       setStatus('error');

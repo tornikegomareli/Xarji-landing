@@ -27,11 +27,25 @@ export const LAND = {
 export const REPO_URL = 'https://github.com/tornikegomareli/Xarji';
 export const REPO_STARS = 9;
 
-// Buttondown newsletter handle. Update after creating the account at
-// buttondown.com — the form POSTs to
-// https://buttondown.com/api/emails/embed-subscribe/<BUTTONDOWN_USERNAME>.
-// Dashboard with subscriber list lives at buttondown.com/<BUTTONDOWN_USERNAME>.
-export const BUTTONDOWN_USERNAME = 'xarji';
+// InstantDB app ID for the landing-page newsletter signups.
+// Create a new app at instantdb.com/dash, replace the placeholder below,
+// then set permissions so anonymous visitors can only CREATE subscriptions
+// (view / update / delete should be denied from the client):
+//
+//   {
+//     subscriptions: {
+//       allow: {
+//         create: "true",
+//         view: "false",
+//         update: "false",
+//         delete: "false",
+//       }
+//     }
+//   }
+//
+// Dashboard for viewing / exporting subscribers:
+//   https://instantdb.com/dash?s=main&t=explorer&app=<INSTANT_LANDING_APP_ID>
+export const INSTANT_LANDING_APP_ID = 'REPLACE_WITH_INSTANT_APP_ID';
 
 export const RELEASE = {
   version: '0.2.4',
