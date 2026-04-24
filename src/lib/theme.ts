@@ -27,25 +27,27 @@ export const LAND = {
 export const REPO_URL = 'https://github.com/tornikegomareli/Xarji';
 export const REPO_STARS = 9;
 
-// InstantDB app ID for the landing-page newsletter signups.
-// Create a new app at instantdb.com/dash, replace the placeholder below,
-// then set permissions so anonymous visitors can only CREATE subscriptions
-// (view / update / delete should be denied from the client):
+// InstantDB app ID for the landing-page newsletter signups. Sourced from
+// .env (PUBLIC_INSTANT_LANDING_APP_ID) so different environments can point
+// at different apps without code changes. Safe to expose — InstantDB sends
+// the ID with every client request.
 //
-//   {
-//     subscriptions: {
-//       allow: {
-//         create: "true",
-//         view: "false",
-//         update: "false",
-//         delete: "false",
-//       }
+// Dashboard / subscriber list / export:
+//   https://instantdb.com/dash?s=main&t=explorer&app=<ID>
+//
+// Required permissions (configure in the dashboard so visitors can only
+// insert — never read, update, or delete):
+//
+//   subscriptions: {
+//     allow: {
+//       create: "true",
+//       view: "false",
+//       update: "false",
+//       delete: "false",
 //     }
 //   }
-//
-// Dashboard for viewing / exporting subscribers:
-//   https://instantdb.com/dash?s=main&t=explorer&app=<INSTANT_LANDING_APP_ID>
-export const INSTANT_LANDING_APP_ID = 'REPLACE_WITH_INSTANT_APP_ID';
+export const INSTANT_LANDING_APP_ID =
+  import.meta.env.PUBLIC_INSTANT_LANDING_APP_ID ?? '';
 
 export const RELEASE = {
   version: '0.2.4',
