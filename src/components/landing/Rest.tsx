@@ -116,7 +116,8 @@ export function Newsletter({ copy, locale }: { copy: Copy['newsletter']; locale:
         }),
       ]);
       setStatus('success');
-    } catch {
+    } catch (err) {
+      console.error('[xarji] newsletter subscribe failed', err);
       setStatus('error');
     }
   };
