@@ -1,14 +1,16 @@
 import React from 'react';
-import { LAND, RELEASE, REPO_URL, REPO_STARS } from '../../lib/theme';
+import { LAND, REPO_URL, REPO_STARS } from '../../lib/theme';
 import { locales, localeLabels, localePaths, type Copy, type Locale } from '../../lib/copy';
+import type { ReleaseInfo } from '../../lib/release';
 import { Logomark, GithubGlyph } from './glyphs';
 
 type Props = {
   copy: Copy['nav'];
   locale: Locale;
+  release: ReleaseInfo;
 };
 
-export default function Nav({ copy, locale }: Props) {
+export default function Nav({ copy, locale, release }: Props) {
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -34,7 +36,7 @@ export default function Nav({ copy, locale }: Props) {
           <Logomark size={34}/>
           <div>
             <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: -0.3, color: LAND.text, fontFamily: LAND.sans, lineHeight: 1 }}>Xarji</div>
-            <div style={{ fontSize: 10, color: LAND.dim, fontFamily: LAND.mono, marginTop: 3 }}>{copy.brandTagline} · v{RELEASE.version}</div>
+            <div style={{ fontSize: 10, color: LAND.dim, fontFamily: LAND.mono, marginTop: 3 }}>{copy.brandTagline} · v{release.version}</div>
           </div>
         </a>
 

@@ -49,18 +49,7 @@ export const REPO_STARS = 9;
 export const INSTANT_LANDING_APP_ID =
   import.meta.env.PUBLIC_INSTANT_LANDING_APP_ID ?? '';
 
-export const RELEASE = {
-  version: '0.2.4',
-  dateIso: '2026-04-23',
-  size: '26.3 MB',
-  sha: 'sha256:77c2…ede1',
-  dmgUrl: `${REPO_URL}/releases/download/v0.2.4/Xarji-0.2.4.dmg`,
-} as const;
-
-export const PRIOR_RELEASES = [
-  { version: '0.2.3', dateIso: '2026-04-22' },
-  { version: '0.2.2', dateIso: '2026-04-22' },
-  { version: '0.2.1', dateIso: '2026-04-22' },
-  { version: '0.2.0', dateIso: '2026-04-22' },
-  { version: '0.1.1', dateIso: '2026-04-21' },
-] as const;
+// Release data (version, DMG URL, sha, prior tags) is no longer hardcoded.
+// It's fetched from the GitHub API at build time — see src/lib/release.ts.
+// Pages pass `ReleaseData` through the LandingLayout into each section that
+// needs it.

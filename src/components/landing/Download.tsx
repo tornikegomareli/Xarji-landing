@@ -1,12 +1,14 @@
-import { LAND, RELEASE, PRIOR_RELEASES, REPO_URL } from '../../lib/theme';
+import { LAND, REPO_URL } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
 import { formatDate } from '../../lib/copy';
+import type { ReleaseData } from '../../lib/release';
 import { AppleGlyph } from './glyphs';
 
-type Props = { copy: Copy['download']; locale: Locale };
+type Props = { copy: Copy['download']; locale: Locale; release: ReleaseData };
 
-export default function Download({ copy, locale }: Props) {
-  const releaseDate = formatDate(RELEASE.dateIso, locale);
+export default function Download({ copy, locale, release }: Props) {
+  const { latest, prior } = release;
+  const releaseDate = formatDate(latest.dateIso, locale);
   return (
     <section id="download" style={{ padding: '100px 28px', position: 'relative' }}>
       <div aria-hidden style={{
@@ -27,7 +29,7 @@ export default function Download({ copy, locale }: Props) {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
               <span style={{ padding: '5px 12px', borderRadius: 999, background: LAND.accent, color: '#fff', fontSize: 10.5, fontWeight: 800, fontFamily: LAND.sans, letterSpacing: 0.8, textTransform: 'uppercase' }}>{copy.latestBadge}</span>
-              <span style={{ fontFamily: LAND.mono, fontSize: 13, color: LAND.muted }}>v{RELEASE.version}</span>
+              <span style={{ fontFamily: LAND.mono, fontSize: 13, color: LAND.muted }}>v{latest.version}</span>
             </div>
             <h3 style={{ margin: '16px 0 0 0', fontSize: 36, fontWeight: 700, color: LAND.text, fontFamily: LAND.sans, letterSpacing: -1.4, lineHeight: 1.05 }}>
               {copy.xarjiForPre}<span style={{ color: LAND.accent }}>{copy.xarjiForAccent}</span>
@@ -36,7 +38,7 @@ export default function Download({ copy, locale }: Props) {
               {copy.releasedPrefix} {releaseDate} · {copy.requires}
             </div>
 
-            <a href={RELEASE.dmgUrl} style={{
+            <a href={latest.dmgUrl} style={{
               marginTop: 24,
               display: 'inline-flex', alignItems: 'center', gap: 14,
               padding: '18px 28px', borderRadius: 14,
@@ -49,11 +51,11 @@ export default function Download({ copy, locale }: Props) {
             onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
               <AppleGlyph size={20}/>
               <span>{copy.dmgCta}</span>
-              <span style={{ padding: '3px 9px', borderRadius: 6, background: 'rgba(255,255,255,0.18)', fontFamily: LAND.mono, fontSize: 11, fontWeight: 500 }}>{RELEASE.size}</span>
+              <span style={{ padding: '3px 9px', borderRadius: 6, background: 'rgba(255,255,255,0.18)', fontFamily: LAND.mono, fontSize: 11, fontWeight: 500 }}>{latest.size}</span>
             </a>
 
             <div style={{ marginTop: 18, display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap', fontSize: 11.5, color: LAND.dim, fontFamily: LAND.mono }}>
-              <span>{RELEASE.sha}</span>
+              <span>{latest.sha}</span>
               <span>{copy.signedNotarized}</span>
             </div>
           </div>
@@ -62,14 +64,15 @@ export default function Download({ copy, locale }: Props) {
         <div style={{ marginTop: 32 }}>
           <div style={{ fontSize: 11, color: LAND.dim, fontFamily: LAND.mono, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 14 }}>{copy.previousLabel}</div>
           <div style={{ display: 'flex', flexDirection: 'column', border: `1px solid ${LAND.line}`, borderRadius: 14, overflow: 'hidden' }}>
-            {PRIOR_RELEASES.map((r, i) => {
-              const summary = copy.priorSummaries[r.version] ?? '';
+            {prior.map((r, i) => {
+              const summaries = copy.priorSummaries as Record<string, string>;
+              const summary = summaries[r.version] ?? '';
               const date = formatDate(r.dateIso, locale);
               return (
                 <div key={r.version} style={{
                   display: 'flex', alignItems: 'center', gap: 20,
                   padding: '14px 22px', background: LAND.panel,
-                  borderBottom: i === PRIOR_RELEASES.length - 1 ? 'none' : `1px solid ${LAND.line}`,
+                  borderBottom: i === prior.length - 1 ? 'none' : `1px solid ${LAND.line}`,
                   fontSize: 13,
                 }}>
                   <span style={{ fontFamily: LAND.mono, fontWeight: 700, color: LAND.text, minWidth: 60 }}>v{r.version}</span>

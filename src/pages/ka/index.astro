@@ -1,9 +1,11 @@
 ---
 import LandingLayout from '../../layouts/LandingLayout.astro';
 import { getCopy } from '../../lib/copy';
+import { fetchRelease } from '../../lib/release';
 
 const locale = 'ka' as const;
 const copy = getCopy(locale);
+const release = await fetchRelease();
 ---
 
-<LandingLayout copy={copy} locale={locale} />
+<LandingLayout copy={copy} locale={locale} release={release} />

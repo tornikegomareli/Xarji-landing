@@ -9,13 +9,15 @@ import Download from '../components/landing/Download';
 import { Faq, TechStack, Newsletter, Footer } from '../components/landing/Rest';
 import Reveal from '../components/landing/Reveal.astro';
 import type { Copy, Locale } from '../lib/copy';
+import type { ReleaseData } from '../lib/release';
 
 interface Props {
   copy: Copy;
   locale: Locale;
+  release: ReleaseData;
 }
 
-const { copy, locale } = Astro.props;
+const { copy, locale, release } = Astro.props;
 const htmlLang = locale === 'ka' ? 'ka' : 'en';
 ---
 
@@ -34,17 +36,17 @@ const htmlLang = locale === 'ka' ? 'ka' : 'en';
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <Nav client:load copy={copy.nav} locale={locale} />
-    <Hero client:load copy={copy.hero} />
+    <Nav client:load copy={copy.nav} locale={locale} release={release.latest} />
+    <Hero client:load copy={copy.hero} release={release.latest} />
     <Reveal><Why copy={copy.why} /></Reveal>
     <Reveal><ProductShot copy={copy.product} /></Reveal>
     <Reveal><Features copy={copy.features} /></Reveal>
     <Reveal><HowItWorks copy={copy.how} /></Reveal>
-    <Reveal><Download copy={copy.download} locale={locale} /></Reveal>
+    <Reveal><Download copy={copy.download} locale={locale} release={release} /></Reveal>
     <Reveal><Faq copy={copy.faq} client:visible /></Reveal>
     <Reveal><Newsletter copy={copy.newsletter} locale={locale} client:visible /></Reveal>
     <Reveal><TechStack copy={copy.techStack} /></Reveal>
-    <Footer copy={copy.footer} locale={locale} />
+    <Footer copy={copy.footer} locale={locale} release={release.latest} />
 
     <script is:inline>
       (() => {

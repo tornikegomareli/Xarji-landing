@@ -1,11 +1,12 @@
 import React from 'react';
-import { LAND, RELEASE } from '../../lib/theme';
+import { LAND } from '../../lib/theme';
 import type { Copy, RichPart } from '../../lib/copy';
+import type { ReleaseInfo } from '../../lib/release';
 import { LivePulse, AppleGlyph, CheckGlyph } from './glyphs';
 
-type Props = { copy: Copy['hero'] };
+type Props = { copy: Copy['hero']; release: ReleaseInfo };
 
-export default function Hero({ copy }: Props) {
+export default function Hero({ copy, release }: Props) {
   return (
     <section id="top" style={{ position: 'relative', overflow: 'hidden', paddingBottom: 60 }}>
       <div aria-hidden style={{
@@ -31,7 +32,7 @@ export default function Hero({ copy }: Props) {
               marginBottom: 24,
             }}>
               <LivePulse/>
-              <span>v{RELEASE.version} · {copy.badgeSuffix}</span>
+              <span>v{release.version} · {copy.badgeSuffix}</span>
             </div>
 
             <h1 style={{
@@ -64,7 +65,7 @@ export default function Hero({ copy }: Props) {
               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
                 <AppleGlyph size={18}/>
                 <span>{copy.ctaPrimary}</span>
-                <span style={{ fontFamily: LAND.mono, fontSize: 11, opacity: 0.75, fontWeight: 500 }}>DMG · {RELEASE.size}</span>
+                <span style={{ fontFamily: LAND.mono, fontSize: 11, opacity: 0.75, fontWeight: 500 }}>DMG · {release.size}</span>
               </a>
               <a href="#how" style={{
                 padding: '16px 22px', borderRadius: 14,

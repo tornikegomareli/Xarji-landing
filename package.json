@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "start": "bun run server.ts",
     "astro": "astro"
   },
   "dependencies": {

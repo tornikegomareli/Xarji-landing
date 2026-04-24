@@ -1,7 +1,8 @@
 import React from 'react';
-import { LAND, RELEASE, REPO_URL } from '../../lib/theme';
+import { LAND, REPO_URL } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
 import { formatDate } from '../../lib/copy';
+import type { ReleaseInfo } from '../../lib/release';
 import { landingDb, id } from '../../lib/instant';
 import { Logomark, SectionLabel } from './glyphs';
 
@@ -205,9 +206,9 @@ export function Newsletter({ copy, locale }: { copy: Copy['newsletter']; locale:
   );
 }
 
-type FooterProps = { copy: Copy['footer']; locale: Locale };
+type FooterProps = { copy: Copy['footer']; locale: Locale; release: ReleaseInfo };
 
-export function Footer({ copy, locale }: FooterProps) {
+export function Footer({ copy, locale, release }: FooterProps) {
   const resourcesLinks: [string, string][] = [
     [copy.resourcesCol.faqLabel, '#faq'],
     [copy.resourcesCol.githubLabel, REPO_URL],
@@ -237,7 +238,7 @@ export function Footer({ copy, locale }: FooterProps) {
         </div>
       </div>
       <div style={{ maxWidth: 1280, margin: '40px auto 0', paddingTop: 24, borderTop: `1px solid ${LAND.line}`, display: 'flex', justifyContent: 'space-between', gap: 16, fontSize: 11, color: LAND.dim, fontFamily: LAND.mono, flexWrap: 'wrap' }}>
-        <span>v{RELEASE.version} · {formatDate(RELEASE.dateIso, locale)}</span>
+        <span>v{release.version} · {formatDate(release.dateIso, locale)}</span>
         <span>{copy.notAffiliated}</span>
       </div>
     </footer>
