@@ -1,43 +1,18 @@
-# Astro Starter Kit: Minimal
+# Xarji — Landing page
+
+Marketing site for [**Xarji**](https://github.com/tornikegomareli/Xarji), the self-hosted expense tracker that parses Georgian bank SMS locally on macOS.
+
+Built with Astro, React, and Tailwind. Static, two locales (`/` English, `/ka/` Georgian).
+
+## Develop
 
 ```sh
-bun create astro@latest -- --template minimal
+bun install
+bun run dev          # http://localhost:4321/
+bun run build        # dist/index.html + dist/ka/index.html
+bun x astro check    # strict type-check
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Copy `.env.example` to `.env` and set `PUBLIC_INSTANT_LANDING_APP_ID` to the InstantDB app that collects newsletter signups.
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+See [`CLAUDE.md`](./CLAUDE.md) for the project's architecture, i18n setup, and supported-banks invariant.
