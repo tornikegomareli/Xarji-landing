@@ -1,7 +1,54 @@
 @import "tailwindcss";
 
+:root {
+  --sv: clamp(48px, 8vw, 100px);
+  --sh: clamp(16px, 4vw, 28px);
+
+  --land-bg:          #0c0c0e;
+  --land-bg-deep:     #08080a;
+  --land-panel:       #17171a;
+  --land-panel-alt:   #1f1f24;
+  --land-panel-hi:    #242429;
+  --land-text:        #f2f2f4;
+  --land-muted:       rgba(242,242,244,0.62);
+  --land-dim:         rgba(242,242,244,0.38);
+  --land-faint:       rgba(242,242,244,0.18);
+  --land-line:        rgba(242,242,244,0.08);
+  --land-line-strong: rgba(242,242,244,0.14);
+  --land-accent:      #ff5a3a;
+  --land-accent-hi:   #ff7352;
+  --land-accent-soft: rgba(255,90,58,0.16);
+  --land-accent-dim:  rgba(255,90,58,0.08);
+  --land-green:       #4bd9a2;
+  --land-amber:       #f1b84a;
+  --land-blue:        #6aa3ff;
+  --land-nav-bg:      rgba(12,12,14,0.72);
+}
+
+[data-theme="light"] {
+  --land-bg:          #f7f7f9;
+  --land-bg-deep:     #efeff2;
+  --land-panel:       #ffffff;
+  --land-panel-alt:   #ebebee;
+  --land-panel-hi:    #e2e2e6;
+  --land-text:        #0c0c0e;
+  --land-muted:       rgba(12,12,14,0.58);
+  --land-dim:         rgba(12,12,14,0.36);
+  --land-faint:       rgba(12,12,14,0.14);
+  --land-line:        rgba(12,12,14,0.08);
+  --land-line-strong: rgba(12,12,14,0.14);
+  --land-accent:      #e84826;
+  --land-accent-hi:   #ff5a3a;
+  --land-accent-soft: rgba(232,72,38,0.12);
+  --land-accent-dim:  rgba(232,72,38,0.06);
+  --land-green:       #0e9e63;
+  --land-amber:       #b8760a;
+  --land-blue:        #2b5fd4;
+  --land-nav-bg:      rgba(247,247,249,0.82);
+}
+
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: #0c0c0e; }
+html, body { margin: 0; padding: 0; background: var(--land-bg); }
 body {
   font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,6 +61,8 @@ html { scroll-behavior: smooth; }
 ::-webkit-scrollbar-track { background: #0c0c0e; }
 ::-webkit-scrollbar-thumb { background: #242429; border-radius: 5px; border: 2px solid #0c0c0e; }
 ::-webkit-scrollbar-thumb:hover { background: #333338; }
+
+.land-mock-frame { scrollbar-width: none; }
 
 @keyframes land-ping {
   0%   { transform: scale(1); opacity: 0.8; }
@@ -55,4 +104,16 @@ html { scroll-behavior: smooth; }
   .land-features-grid { grid-template-columns: 1fr !important; }
   .land-screens-grid { grid-template-columns: 1fr !important; }
   .land-stack-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .land-nav-download { display: none !important; }
+  .land-nav-inner { padding: 12px 16px !important; }
+
+  .land-sms-demo { min-height: 360px !important; }
+  .land-aha-box { padding: 24px 20px !important; }
+  .land-download-box { padding: 24px 20px !important; }
+  .land-download-row { flex-wrap: wrap !important; gap: 2px 16px !important; }
+  .land-download-date { min-width: auto !important; }
+  .land-newsletter-card { padding: 28px 20px !important; }
+  .land-newsletter-deco { display: none !important; }
+  .land-banks-box { padding: 24px 20px !important; }
+  .land-how-banks-title { font-size: 16px !important; }
 }

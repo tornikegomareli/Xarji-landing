@@ -6,7 +6,7 @@ type Props = { copy: Copy['why'] };
 export default function Why({ copy }: Props) {
   return (
     <section id="why" style={{
-      position: 'relative', padding: '100px 28px 80px',
+      position: 'relative', padding: 'var(--sv) var(--sh)',
       background: LAND.bgDeep,
       borderTop: `1px solid ${LAND.line}`, borderBottom: `1px solid ${LAND.line}`,
     }}>
@@ -43,7 +43,7 @@ export default function Why({ copy }: Props) {
           ))}
         </div>
 
-        <div style={{
+        <div className="land-aha-box" style={{
           marginTop: 56,
           padding: '48px 44px',
           background: LAND.panel,

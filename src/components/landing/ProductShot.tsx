@@ -6,14 +6,14 @@ type Props = { copy: Copy['product'] };
 
 export default function ProductShot({ copy }: Props) {
   return (
-    <section id="product" style={{ padding: '60px 28px 100px', position: 'relative' }}>
+    <section id="product" style={{ padding: 'clamp(32px,5vw,60px) var(--sh) var(--sv)', position: 'relative' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <SectionLabel eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle}/>
 
-        <div style={{
+        <div className="land-mock-frame" style={{
           marginTop: 50,
           background: LAND.panel, border: `1px solid ${LAND.lineStrong}`,
-          borderRadius: 24, padding: 0, overflow: 'hidden',
+          borderRadius: 24, padding: 0, overflowX: 'auto', overflowY: 'hidden',
           boxShadow: `0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px ${LAND.line}`,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '14px 18px', background: LAND.bgDeep, borderBottom: `1px solid ${LAND.line}` }}>
@@ -49,8 +49,8 @@ export default function ProductShot({ copy }: Props) {
 
 function MockDashboard({ mock }: { mock: Copy['product']['mock'] }) {
   return (
-    <div style={{ display: 'flex', minHeight: 520, background: LAND.bg }}>
-      <div style={{ width: 200, borderRight: `1px solid ${LAND.line}`, padding: '22px 18px' }}>
+    <div style={{ display: 'flex', minHeight: 520, background: LAND.bg, width: 'max-content', minWidth: 900 }}>
+      <div className="land-mock-sidebar" style={{ width: 200, borderRight: `1px solid ${LAND.line}`, padding: '22px 18px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
           <Logomark size={30}/>
           <div>

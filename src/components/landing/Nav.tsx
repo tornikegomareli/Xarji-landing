@@ -12,22 +12,38 @@ type Props = {
 
 export default function Nav({ copy, locale, release }: Props) {
   const [scrolled, setScrolled] = React.useState(false);
+  const [theme, setTheme] = React.useState<'dark' | 'light'>('dark');
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem('xarji-theme') as 'dark' | 'light' | null;
+    const initial = saved ?? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    setTheme(initial);
+    document.documentElement.setAttribute('data-theme', initial);
+  }, []);
+
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('xarji-theme', next);
+  };
+
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
       backdropFilter: scrolled ? 'blur(20px) saturate(140%)' : 'none',
       WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(140%)' : 'none',
-      background: scrolled ? 'rgba(12,12,14,0.72)' : 'transparent',
+      background: scrolled ? 'var(--land-nav-bg)' : 'transparent',
       borderBottom: scrolled ? `1px solid ${LAND.line}` : '1px solid transparent',
       transition: 'background .2s ease, border-color .2s ease',
     }}>
-      <div style={{
+      <div className="land-nav-inner" style={{
         maxWidth: 1280, margin: '0 auto',
         padding: '18px 28px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24,
@@ -55,6 +71,16 @@ export default function Nav({ copy, locale, release }: Props) {
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button onClick={toggleTheme} aria-label="Toggle theme" style={{
+            width: 34, height: 34, borderRadius: 10, border: `1px solid ${LAND.line}`,
+            background: LAND.panel, color: LAND.muted, cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 15, transition: 'all .15s ease', flexShrink: 0,
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = LAND.lineStrong; e.currentTarget.style.color = LAND.text; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = LAND.line; e.currentTarget.style.color = LAND.muted; }}>
+            {theme === 'dark' ? '☀︎' : '☽'}
+          </button>
           <LocaleSwitch current={locale} aria={copy.localeSwitchAria}/>
           <a href={REPO_URL} target="_blank" rel="noreferrer" style={{
             display: 'flex', alignItems: 'center', gap: 8,
@@ -67,7 +93,7 @@ export default function Nav({ copy, locale, release }: Props) {
             <span className="land-hide-narrow">{copy.sourceLabel}</span>
             <span style={{ fontFamily: LAND.mono, fontSize: 11, color: LAND.dim }}>{REPO_STARS} ★</span>
           </a>
-          <a href="#download" style={{
+          <a href="#download" className="land-nav-download" style={{
             padding: '10px 18px', borderRadius: 10,
             background: LAND.accent, color: '#fff', textDecoration: 'none',
             fontSize: 13, fontWeight: 700, fontFamily: LAND.sans,

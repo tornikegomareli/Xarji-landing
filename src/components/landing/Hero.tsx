@@ -20,7 +20,7 @@ export default function Hero({ copy, release }: Props) {
         background: '#6aa3ff', opacity: 0.06, filter: 'blur(120px)', pointerEvents: 'none',
       }}/>
 
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '80px 28px 40px', position: 'relative' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(40px,6vw,80px) var(--sh) clamp(24px,3vw,40px)', position: 'relative' }}>
         <div className="land-hero-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 60, alignItems: 'center' }}>
           <div>
             <div style={{
@@ -136,7 +136,7 @@ function SmsParseDemo({ sms }: { sms: Copy['hero']['sms'] }) {
   const bankInitial = bankLabel[0];
 
   return (
-    <div style={{ position: 'relative', minHeight: 460 }}>
+    <div className="land-sms-demo" style={{ position: 'relative', minHeight: 460 }}>
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 30,
         background: LAND.panel, border: `1px solid ${LAND.line}`,
