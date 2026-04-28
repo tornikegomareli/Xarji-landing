@@ -20,12 +20,12 @@ export const ka: Copy = {
   nav: {
     brandTagline: 'ხარჯი',
     sourceLabel: 'Source',
-    downloadCta: 'Download',
+    downloadCta: 'გადმოიწერე',
     localeSwitchAria: 'ენის შეცვლა',
     links: [
       { label: 'პროდუქტი', href: '#product' },
       { label: 'როგორ მუშაობს', href: '#how' },
-      { label: 'Download', href: '#download' },
+      { label: 'გადმოიწერე', href: '#download' },
       { label: 'FAQ', href: '#faq' },
     ],
   },

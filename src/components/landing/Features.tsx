@@ -3,7 +3,7 @@ import type { Copy } from '../../lib/copy';
 
 export function Features({ copy }: { copy: Copy['features'] }) {
   return (
-    <section style={{ padding: '100px 28px', background: LAND.bgDeep, borderTop: `1px solid ${LAND.line}`, borderBottom: `1px solid ${LAND.line}` }}>
+    <section style={{ padding: 'var(--sv) var(--sh)', background: LAND.bgDeep, borderTop: `1px solid ${LAND.line}`, borderBottom: `1px solid ${LAND.line}` }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{ fontSize: 22, color: LAND.accent, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
         <div className="land-features-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginTop: 48 }}>
@@ -27,7 +27,7 @@ export function Features({ copy }: { copy: Copy['features'] }) {
 
 export function HowItWorks({ copy }: { copy: Copy['how'] }) {
   return (
-    <section id="how" style={{ padding: '100px 28px' }}>
+    <section id="how" style={{ padding: 'var(--sv) var(--sh)' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <div style={{ fontSize: 22, color: LAND.accent, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
         <div className="land-how-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20, marginTop: 48 }}>
@@ -45,7 +45,7 @@ export function HowItWorks({ copy }: { copy: Copy['how'] }) {
           ))}
         </div>
 
-        <div style={{ marginTop: 80, padding: '40px 36px', background: LAND.panel, border: `1px solid ${LAND.line}`, borderRadius: 24 }}>
+        <div className="land-banks-box" style={{ marginTop: 80, padding: '40px 36px', background: LAND.panel, border: `1px solid ${LAND.line}`, borderRadius: 24 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
             <div>
               <div style={{ fontSize: 11.5, color: LAND.accent, fontFamily: LAND.mono, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase' }}>{copy.banks.eyebrow}</div>

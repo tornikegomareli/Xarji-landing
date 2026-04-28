@@ -10,7 +10,7 @@ export default function Download({ copy, locale, release }: Props) {
   const { latest, prior } = release;
   const releaseDate = formatDate(latest.dateIso, locale);
   return (
-    <section id="download" style={{ padding: '100px 28px', position: 'relative' }}>
+    <section id="download" style={{ padding: 'var(--sv) var(--sh)', position: 'relative' }}>
       <div aria-hidden style={{
         position: 'absolute', top: '30%', left: '50%', transform: 'translateX(-50%)',
         width: 600, height: 300, borderRadius: '50%',
@@ -19,7 +19,7 @@ export default function Download({ copy, locale, release }: Props) {
       <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative' }}>
         <div style={{ textAlign: 'center', fontSize: 22, color: LAND.accent, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
 
-        <div style={{
+        <div className="land-download-box" style={{
           marginTop: 40, padding: 36,
           background: `linear-gradient(180deg, ${LAND.panelAlt}, ${LAND.panel})`,
           border: `1px solid ${LAND.lineStrong}`,
@@ -69,14 +69,14 @@ export default function Download({ copy, locale, release }: Props) {
               const summary = summaries[r.version] ?? '';
               const date = formatDate(r.dateIso, locale);
               return (
-                <div key={r.version} style={{
+                <div key={r.version} className="land-download-row" style={{
                   display: 'flex', alignItems: 'center', gap: 20,
                   padding: '14px 22px', background: LAND.panel,
                   borderBottom: i === prior.length - 1 ? 'none' : `1px solid ${LAND.line}`,
                   fontSize: 13,
                 }}>
                   <span style={{ fontFamily: LAND.mono, fontWeight: 700, color: LAND.text, minWidth: 60 }}>v{r.version}</span>
-                  <span style={{ fontFamily: LAND.mono, fontSize: 11, color: LAND.dim, minWidth: 160 }}>{date}</span>
+                  <span className="land-download-date" style={{ fontFamily: LAND.mono, fontSize: 11, color: LAND.dim, minWidth: 160 }}>{date}</span>
                   <span style={{ flex: 1, color: LAND.muted, fontFamily: LAND.sans }}>{summary}</span>
                   <a href={`${REPO_URL}/releases/download/v${r.version}/Xarji-${r.version}.dmg`} style={{ fontSize: 11.5, color: LAND.accent, fontFamily: LAND.sans, fontWeight: 600, textDecoration: 'none' }}>{copy.priorDownloadLink}</a>
                 </div>

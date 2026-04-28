@@ -10,7 +10,7 @@ export function Faq({ copy }: { copy: Copy['faq'] }) {
   const [open, setOpen] = React.useState(0);
 
   return (
-    <section id="faq" style={{ padding: '100px 28px', background: LAND.bgDeep, borderTop: `1px solid ${LAND.line}`, borderBottom: `1px solid ${LAND.line}` }}>
+    <section id="faq" style={{ padding: 'var(--sv) var(--sh)', background: LAND.bgDeep, borderTop: `1px solid ${LAND.line}`, borderBottom: `1px solid ${LAND.line}` }}>
       <div style={{ maxWidth: 880, margin: '0 auto' }}>
         <SectionLabel eyebrow={copy.eyebrow} title={copy.title}/>
         <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -73,7 +73,7 @@ function FaqAnswer({ text }: { text: string }) {
 
 export function TechStack({ copy }: { copy: Copy['techStack'] }) {
   return (
-    <section style={{ padding: '80px 28px' }}>
+    <section style={{ padding: 'clamp(40px,6vw,80px) var(--sh)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', fontSize: 11.5, color: LAND.accent, fontFamily: LAND.mono, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 28 }}>{copy.eyebrow}</div>
         <div className="land-stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14 }}>
@@ -129,14 +129,14 @@ export function Newsletter({ copy, locale }: { copy: Copy['newsletter']; locale:
   const showForm = !isSuccess;
 
   return (
-    <section style={{ padding: '100px 28px' }}>
+    <section style={{ padding: 'var(--sv) var(--sh)' }}>
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
-        <div style={{
+        <div className="land-newsletter-card" style={{
           padding: 48, borderRadius: 28,
           background: `radial-gradient(1000px 400px at 20% 0%, ${LAND.accentDim}, transparent), ${LAND.panel}`,
           border: `1px solid ${LAND.lineStrong}`, position: 'relative', overflow: 'hidden',
         }}>
-          <div aria-hidden style={{ position: 'absolute', top: -60, right: -40, fontSize: 220, fontFamily: LAND.serif, color: LAND.accent, opacity: 0.08, lineHeight: 1, fontStyle: 'italic' }}>✉</div>
+          <div aria-hidden className="land-newsletter-deco" style={{ position: 'absolute', top: -60, right: -40, fontSize: 220, fontFamily: LAND.serif, color: LAND.accent, opacity: 0.08, lineHeight: 1, fontStyle: 'italic' }}>✉</div>
           <div style={{ position: 'relative', maxWidth: 520 }}>
             <div style={{ fontSize: 11.5, color: LAND.accent, fontFamily: LAND.mono, fontWeight: 700, letterSpacing: 1.2, textTransform: 'uppercase' }}>{copy.eyebrow}</div>
             <h3 style={{ margin: '14px 0 0 0', fontSize: 34, fontWeight: 700, color: LAND.text, fontFamily: LAND.sans, letterSpacing: -1.2, lineHeight: 1.1 }}>
@@ -221,7 +221,7 @@ export function Footer({ copy, locale, release }: FooterProps) {
   ];
   const productLinks: [string, string][] = copy.productCol.links.map(l => [l.label, l.href]);
   return (
-    <footer style={{ padding: '60px 28px 40px', borderTop: `1px solid ${LAND.line}`, background: LAND.bgDeep }}>
+    <footer style={{ padding: 'clamp(32px,5vw,60px) var(--sh) clamp(24px,3vw,40px)', borderTop: `1px solid ${LAND.line}`, background: LAND.bgDeep }}>
       <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', justifyContent: 'space-between', gap: 30, flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
           <Logomark size={36}/>
