@@ -1,4 +1,5 @@
 import React from 'react';
+import mixpanel from 'mixpanel-browser';
 import { LAND } from '../../lib/theme';
 import type { Copy, RichPart } from '../../lib/copy';
 import type { ReleaseInfo } from '../../lib/release';
@@ -53,7 +54,7 @@ export default function Hero({ copy, release }: Props) {
             </p>
 
             <div style={{ marginTop: 32, display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-              <a href="#download" style={{
+              <a href="#download" onClick={() => mixpanel.track('CTA Clicked', { cta: 'hero_primary' })} style={{
                 display: 'flex', alignItems: 'center', gap: 12,
                 padding: '16px 24px', borderRadius: 14,
                 background: LAND.accent, color: '#fff', textDecoration: 'none',
@@ -67,7 +68,7 @@ export default function Hero({ copy, release }: Props) {
                 <span>{copy.ctaPrimary}</span>
                 <span style={{ fontFamily: LAND.mono, fontSize: 11, opacity: 0.75, fontWeight: 500 }}>DMG · {release.size}</span>
               </a>
-              <a href="#how" style={{
+              <a href="#how" onClick={() => mixpanel.track('CTA Clicked', { cta: 'hero_secondary' })} style={{
                 padding: '16px 22px', borderRadius: 14,
                 border: `1px solid ${LAND.lineStrong}`, background: LAND.panel,
                 color: LAND.text, textDecoration: 'none',

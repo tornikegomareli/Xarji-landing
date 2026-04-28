@@ -1,4 +1,5 @@
 import React from 'react';
+import mixpanel from 'mixpanel-browser';
 import { LAND, REPO_URL, REPO_STARS } from '../../lib/theme';
 import { locales, localeLabels, localePaths, type Copy, type Locale } from '../../lib/copy';
 import type { ReleaseInfo } from '../../lib/release';
@@ -117,7 +118,7 @@ function LocaleSwitch({ current, aria }: { current: Locale; aria: string }) {
       {locales.map(l => {
         const active = l === current;
         return (
-          <a key={l} href={localePaths[l]} aria-current={active ? 'page' : undefined} style={{
+          <a key={l} href={localePaths[l]} aria-current={active ? 'page' : undefined} onClick={() => { if (!active) mixpanel.track('Locale Switch', { from: current, to: l }); }} style={{
             padding: '5px 9px', borderRadius: 7,
             fontSize: 11, fontWeight: 700, fontFamily: LAND.mono, letterSpacing: 0.5,
             background: active ? LAND.text : 'transparent',
