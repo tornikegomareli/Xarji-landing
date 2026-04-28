@@ -1,4 +1,5 @@
 import React from 'react';
+import mixpanel from 'mixpanel-browser';
 import { LAND, REPO_URL } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
 import { formatDate } from '../../lib/copy';
@@ -22,7 +23,7 @@ export function Faq({ copy }: { copy: Copy['faq'] }) {
                 borderRadius: 16, overflow: 'hidden',
                 transition: 'border-color .2s ease',
               }}>
-                <button onClick={() => setOpen(isOpen ? -1 : i)} style={{
+                <button onClick={() => { if (!isOpen) mixpanel.track('FAQ Opened', { question: it.q }); setOpen(isOpen ? -1 : i); }} style={{
                   width: '100%', padding: '20px 24px',
                   background: 'transparent', border: 'none', cursor: 'pointer',
                   display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -116,6 +117,7 @@ export function Newsletter({ copy, locale }: { copy: Copy['newsletter']; locale:
           locale,
         }),
       ]);
+      mixpanel.track('Newsletter Signup', { locale });
       setStatus('success');
     } catch (err) {
       console.error('[xarji] newsletter subscribe failed', err);

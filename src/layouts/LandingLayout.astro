@@ -34,6 +34,16 @@ const htmlLang = locale === 'ka' ? 'ka' : 'en';
         document.documentElement.setAttribute('data-theme', t);
       })();
     </script>
+    <script>
+      import mixpanel from "mixpanel-browser";
+      mixpanel.init('ab17d8b7a30ecf77566861cbe57130bd', {
+        autocapture: true,
+        record_sessions_percent: 100,
+        api_host: 'https://api-eu.mixpanel.com',
+      });
+      mixpanel.identify(mixpanel.get_distinct_id());
+      mixpanel.people.set_once({ '$created': new Date().toISOString() });
+    </script>
     <link rel="alternate" hreflang="en" href="/" />
     <link rel="alternate" hreflang="ka" href="/ka/" />
     <link rel="alternate" hreflang="x-default" href="/" />
@@ -48,7 +58,7 @@ const htmlLang = locale === 'ka' ? 'ka' : 'en';
     <Reveal><ProductShot copy={copy.product} /></Reveal>
     <Reveal><Features copy={copy.features} /></Reveal>
     <Reveal><HowItWorks copy={copy.how} /></Reveal>
-    <Reveal><Download copy={copy.download} locale={locale} release={release} /></Reveal>
+    <Reveal><Download client:visible copy={copy.download} locale={locale} release={release} /></Reveal>
     <Reveal><Faq copy={copy.faq} client:visible /></Reveal>
     <Reveal><Newsletter copy={copy.newsletter} locale={locale} client:visible /></Reveal>
     <Reveal><TechStack copy={copy.techStack} /></Reveal>
