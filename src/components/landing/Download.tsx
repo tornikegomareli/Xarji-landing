@@ -212,8 +212,6 @@ export default function Download({ copy, locale, release }: Props) {
             }}
           >
             {prior.map((r, i) => {
-              const summaries = copy.priorSummaries as Record<string, string>;
-              const summary = summaries[r.version] ?? "";
               const date = formatDate(r.dateIso, locale);
               return (
                 <div
@@ -248,20 +246,17 @@ export default function Download({ copy, locale, release }: Props) {
                       fontFamily: LAND.mono,
                       fontSize: 11,
                       color: LAND.dim,
-                      minWidth: 160,
                     }}
                   >
                     {date}
                   </span>
-                  <span
-                    style={{
-                      flex: 1,
-                      color: LAND.muted,
-                      fontFamily: LAND.sans,
-                    }}
-                  >
-                    {summary}
-                  </span>
+                  {/* Spacer pushes the download link to the right edge.
+                      Per-release summary text intentionally removed —
+                      the list is a download index, not a changelog;
+                      hand-authored summaries went stale faster than they
+                      were maintained. GitHub release notes carry the
+                      "what's in this version" story. */}
+                  <span style={{ flex: 1 }} />
                   <a
                     href={`${REPO_URL}/releases/download/v${r.version}/Xarji-${r.version}.dmg`}
                     onClick={() =>
