@@ -8,11 +8,27 @@
 //
 // The menu-bar app's Info.plist points SUFeedURL at https://xarji.app/
 // appcast.xml; Sparkle hits this endpoint daily (per
-// SUScheduledCheckInterval=86400), looks at the topmost <item>'s
-// sparkle:version, and if it's higher than CFBundleVersion offers the
-// download. Signature verification uses the EdDSA public key embedded
-// in each user's installed Info.plist (SUPublicEDKey), which has to
-// match the key whose private half was used to sign the DMG.
+// SUScheduledCheckInterval=86400), compares the topmost <item>'s
+// sparkle:version against the installed bundle's CFBundleVersion, and
+// if the feed's value is higher it offers the download. Signature
+// verification uses the EdDSA public key embedded in each user's
+// installed Info.plist (SUPublicEDKey).
+//
+// Important: <sparkle:version> is treated by Sparkle as the build
+// number equivalent (a strictly-increasing integer), NOT the marketing
+// version. <sparkle:shortVersionString> is the marketing version used
+// for display only. If the feed puts the marketing version into both
+// fields, Sparkle's numeric comparison degrades to nonsense — splitting
+// "0.6.0" into [0, 6, 0] and comparing against an installed
+// CFBundleVersion like "16" gives 0 < 16, so the latest release looks
+// older than what's installed and users see "You're up to date" even
+// though they're not. v0.6.0 surfaced this exact bug.
+//
+// We extract the build number from a hidden HTML comment the publish
+// script writes into the GitHub release body: `<!-- build: 18 -->`.
+// Falls back to the marketing version string when the marker is
+// missing (legacy releases pre-dating the publish-script change keep
+// working, even if their Sparkle comparison is still subtly broken).
 
 import type { APIRoute } from 'astro';
 
@@ -79,8 +95,9 @@ export const GET: APIRoute = async () => {
     }
 
     const version = stripV(r.tag_name);
+    const build = parseBuildNumber(r.body);
     const pubDate = new Date(r.published_at).toUTCString();
-    items.push(buildItem({ version, pubDate, dmgUrl: dmg.browser_download_url, sigJson, name: r.name, body: r.body }));
+    items.push(buildItem({ version, build, pubDate, dmgUrl: dmg.browser_download_url, sigJson, name: r.name, body: r.body }));
   }
 
   const xml = `<?xml version="1.0" encoding="utf-8"?>
@@ -108,18 +125,25 @@ export const GET: APIRoute = async () => {
 
 function buildItem(args: {
   version: string;
+  build: string | null;
   pubDate: string;
   dmgUrl: string;
   sigJson: EdDsaJson;
   name: string;
   body: string;
 }): string {
-  const { version, pubDate, dmgUrl, sigJson, name, body } = args;
+  const { version, build, pubDate, dmgUrl, sigJson, name, body } = args;
   const title = name?.trim() || `Version ${version}`;
+  // sparkle:version MUST be the build number for Sparkle's numeric
+  // comparison to work correctly against the installed CFBundleVersion.
+  // Fall back to the marketing version on legacy releases that don't
+  // carry the marker — those will still be broken on auto-update, but
+  // re-publishing them with the marker fixes them retroactively.
+  const sparkleVersion = build ?? version;
   return `
     <item>
       <title>${escapeXml(title)}</title>
-      <sparkle:version>${escapeXml(version)}</sparkle:version>
+      <sparkle:version>${escapeXml(sparkleVersion)}</sparkle:version>
       <sparkle:shortVersionString>${escapeXml(version)}</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>${MIN_MACOS}</sparkle:minimumSystemVersion>
       <pubDate>${pubDate}</pubDate>
@@ -129,6 +153,17 @@ function buildItem(args: {
                  length="${sigJson.length}"
                  type="application/octet-stream"/>
     </item>`;
+}
+
+// Looks for a hidden HTML comment of the form "<!-- build: 18 -->"
+// anywhere in the release body. Case-insensitive on the keyword, plus
+// whitespace tolerant either side of the colon. Returns the captured
+// digits verbatim (as a string, so the XML emitter doesn't have to
+// worry about Number → string round-tripping). null when no marker
+// exists or it can't be parsed cleanly.
+function parseBuildNumber(body: string): string | null {
+  const match = /<!--\s*build:\s*(\d+)\s*-->/i.exec(body);
+  return match ? match[1] : null;
 }
 
 function githubHeaders(): Record<string, string> {
