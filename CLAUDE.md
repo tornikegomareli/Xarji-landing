@@ -21,7 +21,7 @@ This repo ships a **static site**: dark-mode landing page with a coral accent, i
 
 ## 2. Stack
 
-- **Astro 6** (static build, `output: "static"`) — two page files, one per locale
+- **Astro 6** (static build, `output: "static"`) — a landing page and a Grok bot guide, each in both locales
 - **`@astrojs/react`** — React 19 islands for interactivity (nav scroll, hero SMS animation, FAQ accordion, newsletter form)
 - **Tailwind v4** via `@tailwindcss/vite` — reset + utilities only; most section styling is inline with Ink tokens
 - **@instantdb/react** — newsletter signups only (see §7)
@@ -50,10 +50,12 @@ Type-check: `bun x astro check` (strict — 0 errors expected before any commit)
 ├── public/
 │   └── favicon.svg               ← Xarji X-mark (coral gradient rounded square)
 └── src/
-    ├── content/copy/
-    │   ├── en.ts                 ← canonical English copy — the shape of every locale
-    │   ├── ka.ts                 ← Georgian copy, declared `: Copy` for shape enforcement
-    │   └── types.ts              ← `export type Copy = typeof en`
+    ├── content/
+    │   ├── grokPrompt.ts         ← the guide's bot prompt + example event, English for both locales
+    │   └── copy/
+    │       ├── en.ts             ← canonical English copy — the shape of every locale
+    │       ├── ka.ts             ← Georgian copy, declared `: Copy` for shape enforcement
+    │       └── types.ts          ← `export type Copy = typeof en`
     │
     ├── lib/
     │   ├── copy.ts               ← getCopy(locale), formatDate(iso, locale), isLocale, locales, localePaths, localeLabels
@@ -72,12 +74,19 @@ Type-check: `bun x astro check` (strict — 0 errors expected before any commit)
     │   ├── Rest.tsx              ← Faq, TechStack, Newsletter, Footer
     │   └── Reveal.astro          ← CSS-only scroll-reveal wrapper
     │
+    ├── components/guide/
+    │   └── CopyBlock.tsx         ← code block + Copy button island (client:visible)
+    │
     ├── layouts/
-    │   └── LandingLayout.astro   ← single layout, takes { copy: Copy, locale: Locale, release: ReleaseData }
+    │   ├── LandingLayout.astro   ← landing layout, takes { copy: Copy, locale: Locale, release: ReleaseData }
+    │   └── GrokGuideLayout.astro ← /grok/ guide: setup steps, copy-paste bot prompt, example event
     │
     ├── pages/
     │   ├── index.astro           ← locale = 'en' → /
-    │   └── ka/index.astro        ← locale = 'ka' → /ka/
+    │   ├── grok/index.astro      ← Grok bot guide, 'en' → /grok/
+    │   └── ka/
+    │       ├── index.astro       ← locale = 'ka' → /ka/
+    │       └── grok/index.astro  ← Grok bot guide, 'ka' → /ka/grok/
     │
     └── styles/
         └── global.css            ← Tailwind import + Ink keyframes + responsive breakpoints + .land-reveal

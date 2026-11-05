@@ -1,0 +1,9 @@
+---
+import GrokGuideLayout from '../../layouts/GrokGuideLayout.astro';
+import { getCopy } from '../../lib/copy';
+
+const locale = 'en' as const;
+const copy = getCopy(locale);
+---
+
+<GrokGuideLayout copy={copy} locale={locale} />

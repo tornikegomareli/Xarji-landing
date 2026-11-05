@@ -342,6 +342,53 @@ export const en = {
     ],
   },
 
+  grok: {
+    meta: {
+      title: 'Xarji + Grok bot · Setup guide',
+      description:
+        'Send each new bank transaction from Xarji to your own Grok bot. Ask it how much you can spend today.',
+    },
+    homeLabel: 'Xarji',
+    eyebrow: 'Guide',
+    title: 'Xarji + Grok bot',
+    lead: 'Xarji can send each new bank transaction to your own Grok bot. Then you ask the bot how much you can spend today, and it answers from your real payments.',
+    privacyTitle: 'This sends data off your Mac',
+    privacyBody: 'The webhook is off by default. When you turn it on, Xarji sends each new transaction to the URL you choose: amount, currency, merchant, card last 4 digits and time. The SMS text is never sent.',
+    stepsTitle: 'Setup',
+    steps: [
+      {
+        title: 'Update Xarji',
+        body: 'Download the latest Xarji from this site, or click Check for Updates… in the Xarji menu bar menu. The Manage page must show a Webhook card.',
+      },
+      {
+        title: 'Create your bot',
+        body: 'The bot needs an HTTPS URL that accepts POST requests, for example an automation with a webhook trigger or a small server of your own. Paste the prompt below as its instructions. Copy the URL and the secret key of the bot.',
+      },
+      {
+        title: 'Connect Xarji',
+        body: 'Open the Xarji dashboard, then Manage → Webhook. Paste the URL and the secret. Click Save, then Send test. If you see HTTP 200, it works.',
+      },
+      {
+        title: 'Tell the bot what you have',
+        body: 'Write to your bot, for example: "I have 1,500 GEL today. Next salary on the 25th. Must pay: internet 50 GEL on the 20th." After that, ask "status" whenever you want.',
+      },
+    ],
+    promptTitle: 'The prompt',
+    promptSub: 'Paste this into your bot as its instructions. It tells the bot what Xarji sends and how to count your money.',
+    copyLabel: 'Copy',
+    copiedLabel: 'Copied',
+    eventTitle: 'What Xarji sends',
+    eventSub: 'One POST for each new transaction. Your secret is in the Authorization: Bearer header.',
+    notesTitle: 'Good to know',
+    notes: [
+      'Only new transactions are sent. Payments from before you turned on the webhook are not.',
+      'Xarji sends while your Mac is on and Xarji is running. If the bot is down, Xarji keeps the events and sends them when the bot is back.',
+      "If the bot answers with an error such as 401 or 404, Xarji drops that event. If you change the bot's secret, update it on the Manage page too.",
+      'The same event can arrive twice. The prompt tells the bot to skip repeats by eventId.',
+    ],
+    backLabel: '← Back to Xarji',
+  },
+
   footer: {
     brand: 'Xarji · ხარჯი',
     madeIn: 'Made in Tbilisi · MIT license · © 2026',
@@ -360,6 +407,7 @@ export const en = {
       githubLabel: 'GitHub',
       instantdbLabel: 'InstantDB',
       bugLabel: 'Report a bug',
+      grokLabel: 'Grok bot guide',
     },
     legalCol: {
       title: 'Legal',

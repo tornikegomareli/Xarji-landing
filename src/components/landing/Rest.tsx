@@ -2,7 +2,7 @@ import React from 'react';
 import mixpanel from 'mixpanel-browser';
 import { LAND, REPO_URL } from '../../lib/theme';
 import type { Copy, Locale } from '../../lib/copy';
-import { formatDate } from '../../lib/copy';
+import { formatDate, grokGuidePaths } from '../../lib/copy';
 import type { ReleaseInfo } from '../../lib/release';
 import { landingDb, id } from '../../lib/instant';
 import { Logomark, SectionLabel } from './glyphs';
@@ -213,6 +213,7 @@ type FooterProps = { copy: Copy['footer']; locale: Locale; release: ReleaseInfo 
 export function Footer({ copy, locale, release }: FooterProps) {
   const resourcesLinks: [string, string][] = [
     [copy.resourcesCol.faqLabel, '#faq'],
+    [copy.resourcesCol.grokLabel, grokGuidePaths[locale]],
     [copy.resourcesCol.githubLabel, REPO_URL],
     [copy.resourcesCol.instantdbLabel, 'https://instantdb.com'],
     [copy.resourcesCol.bugLabel, `${REPO_URL}/issues/new`],

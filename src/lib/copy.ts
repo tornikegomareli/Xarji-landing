@@ -28,6 +28,11 @@ export const localePaths: Record<Locale, string> = {
   ka: '/ka/',
 };
 
+export const grokGuidePaths: Record<Locale, string> = {
+  en: '/grok/',
+  ka: '/ka/grok/',
+};
+
 /**
  * Format an ISO date (`'2026-04-23'`) for display in the given locale.
  * `long` produces e.g. "April 23, 2026" in en-US and "2026 წლის 23 აპრილი"
